@@ -18,47 +18,54 @@ end
 =end
 
 
-def rcrv_preorder(root)
-    # recursive traversal solution
-    return [] if !root
-    [root.val] + rcrv_preorder(root.left) + rcrv_preorder(root.right)
+def rcur_preorder(root)
+  # recursive traversal solution
+  return [] if !root
+  [root.val] + rcur_preorder(root.left) + rcur_preorder(root.right)
 end
 
 def itr_preorder()
-    # iterative solution
-    unresolved = []
-    answer = []
-    while root
-        answer << root.val
-        unresolved << root.right if root.right
-        root = root.left
-        root ||= unresolved.pop
-    end
-    answer
+  # iterative solution
+  unresolved = []
+  answer = []
+  while root
+      answer << root.val
+      unresolved << root.right if root.right
+      root = root.left
+      root ||= unresolved.pop
+  end
+  answer
 end
 
-def rcvr_inorder(root)
-    #Recursive Solution
-    return [] if !root
-    rcvr_inorder(root.left) + [root.val] + rcvr_inorder(root.right)
+def rcur_inorder(root)
+  #Recursive Solution
+  return [] if !root
+  rcur_inorder(root.left) + [root.val] + rcur_inorder(root.right)
 end
 
 def itr_inorder(root)
-    #Iterative Solution
-    future_steps = []
-    answer = []
+  #Iterative Solution
+  future_steps = []
+  answer = []
 
-    while root
-        left_step = root.left
-        root.left = nil
-        if left_step
-            future_steps << root
-            root = left_step
-        else
-            answer << root.val
-            root = root.right
-            root ||= future_steps.pop
-        end
-    end
-    answer
+  while root
+      left_step = root.left
+      root.left = nil
+      if left_step
+          future_steps << root
+          root = left_step
+      else
+          answer << root.val
+          root = root.right
+          root ||= future_steps.pop
+      end
+  end
+  answer
+end
+
+def rcur_postorder(root)
+  # Recursive solution
+  return [] if !root
+  return [root.val] if !root.left && !root.right
+  rcur_postorder(root.left) + rcur_postorder(root.right) + [root.val]
 end
