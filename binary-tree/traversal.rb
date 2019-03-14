@@ -69,3 +69,24 @@ def rcur_postorder(root)
   return [root.val] if !root.left && !root.right
   rcur_postorder(root.left) + rcur_postorder(root.right) + [root.val]
 end
+
+def itr_postorder(root)
+  # Iterative Solution
+  answer = []
+  future_branches = []
+  while root
+      if !root.left && !root.right
+          answer << root.val
+      else
+          left = root.left
+          right = root.right
+          root.left = nil
+          root.right = nil
+          future_branches << root
+          future_branches << right if right
+          future_branches << left if left
+      end
+      root = future_branches.pop
+  end
+  answer
+end
