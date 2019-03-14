@@ -36,3 +36,9 @@ def itr_preorder()
     end
     answer
 end
+
+def rcvr_inorder(root)
+    #Recursive Solution
+    return [] if !root
+    rcvr_inorder(root.left) + [root.val] + rcvr_inorder(root.right)
+end
