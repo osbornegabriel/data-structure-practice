@@ -42,3 +42,23 @@ def rcvr_inorder(root)
     return [] if !root
     rcvr_inorder(root.left) + [root.val] + rcvr_inorder(root.right)
 end
+
+def itr_inorder(root)
+    #Iterative Solution
+    future_steps = []
+    answer = []
+
+    while root
+        left_step = root.left
+        root.left = nil
+        if left_step
+            future_steps << root
+            root = left_step
+        else
+            answer << root.val
+            root = root.right
+            root ||= future_steps.pop
+        end
+    end
+    answer
+end
