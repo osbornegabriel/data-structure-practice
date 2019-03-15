@@ -132,3 +132,19 @@ def is_symmetric_compare(left, right)
 end
 
 ########################
+
+# Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+# Recursive Solution
+def has_path_sum(root, sum)
+    return false if !root
+    path_helper(root, 0, sum)
+end
+
+def path_helper(path, total, sum)
+    total += path.val
+    return total == sum if !(path.right || path.left)
+    left = path_helper(path.left,total,sum) if path.left
+    right = path_helper(path.right,total,sum) if path.right
+    !!(left || right)
+end
