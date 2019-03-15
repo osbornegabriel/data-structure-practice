@@ -116,3 +116,19 @@ def max_depth(root)
     return 0 if !root
     1 + [max_depth(root.left), max_depth(root.right)].max
 end
+
+
+# Check whether tree is symmetric (mirror of itself)
+
+# Recursive solution
+def is_symmetric(root)
+    is_symmetric_compare(root&.left, root&.right)
+end
+
+def is_symmetric_compare(left, right)
+    return false if left&.val != right&.val
+    return true if !(left || right)
+    is_symmetric_compare(left.left, right.right) && is_symmetric_compare(left.right, right.left)
+end
+
+########################
