@@ -110,3 +110,9 @@ def level_order(root)
     end
     answer
 end
+
+#Finding the maximum depth of the tree
+def max_depth(root)
+    return 0 if !root
+    1 + [max_depth(root.left), max_depth(root.right)].max
+end
