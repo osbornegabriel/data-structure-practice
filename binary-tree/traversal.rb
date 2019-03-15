@@ -90,3 +90,23 @@ def itr_postorder(root)
   end
   answer
 end
+
+def level_order(root)
+    answer = []
+    current_level = []
+    current_level << root if root
+    next_level = []
+
+    until current_level.empty?
+        level_vals = []
+        for level in current_level
+            level_vals << level.val
+            next_level << level.left if level.left
+            next_level << level.right if level.right
+        end
+        answer << level_vals
+        current_level = next_level
+        next_level = []
+    end
+    answer
+end
