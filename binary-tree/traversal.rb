@@ -148,3 +148,20 @@ def path_helper(path, total, sum)
     right = path_helper(path.right,total,sum) if path.right
     !!(left || right)
 end
+
+# Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+
+# Recursive Solution
+def path_sum(root, sum)
+    path_sum_helper([], root, sum)
+end
+
+def path_sum_helper(path, root, sum)
+    return [] if !root
+    current_path = path.dup
+    current_path << root.val
+    return  [current_path] if (!root.left && !root.right) && current_path.reduce(:+) == sum
+    left_path = path_sum_helper(current_path, root.left, sum)
+    right_path = path_sum_helper(current_path, root.right, sum)
+    left_path + right_path
+end
